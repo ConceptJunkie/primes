@@ -57,7 +57,7 @@ def makePrimes( n, p ):
             file.write( '{},{}\n'.format( n, p ) )
 
             if n % 1000000 == 0:
-                print( '{:,}.format( n ) )
+                print( '{:,}'.format( n ) )
 
             if n % 50000000 == 0:
                 file.close( )
