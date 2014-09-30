@@ -24,23 +24,24 @@ def loadFile( fileName ):
 def main( ):
     lineCount = 1
 
-    primesSize = 5
+    howStrong = 10
+    maxIndex = 1000000
+    primesSize = howStrong + 2
 
     primes = [ ]
     diffs = [ ]
-    adiffs = [ ]
+
+    # everything is offset by 2
+    strongIndex = [ 0 ] * 9
 
     for i in range( 0, primesSize ):
         primes.append( [ -9999999, -9999999 ] )
 
     for i in range( 0, primesSize - 1 ):
         diffs.append( 0 )
-        adiffs.append( 0 )
-
-    isolatedIndex = 0
 
     firstDataFile = 0
-    lastDataFile = 6950
+    lastDataFile = 950
 
     inputList = [ ]
 
@@ -50,13 +51,10 @@ def main( ):
         inputList.append( 'c:\\data\primes\\{:04}-{:04}.txt'.format( current, current + 50 ) )
         current += 50
 
-    numberOfTypes = 100
+    strongFiles = [ ]
 
-    isolatedIndex = [ 0 ] * numberOfTypes
-    isolatedFile = [ ]
-
-    for i in range( 0, numberOfTypes ):
-        isolatedFile.append( open( 'c:\\data\primes\\isolated{:03}_primes.txt'.format( i * 2 + 4 ), 'w' ) )
+    for i in range( 2, howStrong + 1 ):
+        strongFiles.append( open( 'c:\\data\primes\\strong{:02}_primes.txt'.format( i ), 'w' ) )
 
     printInterval = 1000000
 
@@ -73,22 +71,23 @@ def main( ):
 
                 sum = 0
 
-                for i in range( 0, primesSize - 1 ):
-                    sum += diffs[ i ]
-                    adiffs[ i ] = sum
-
                 if primes[ 0 ][ 0 ] % printInterval == 0:
-                    print( 'isolated: {:,}'.format( primes[ 0 ][ 0 ] ) )
+                    print( 'strong: {:,}'.format( primes[ 0 ][ 0 ] ) )
 
-                for i in range( 0, numberOfTypes ):
-                    diff = i * 2 + 4
+                #if primes[ 0 ][ 0 ] > 10000000:
+                #    break
 
-                    if diffs[ 0 ] > diff and diffs[ 1 ] > diff and isolatedIndex[ i ] <= 1000000:
-                        isolatedIndex[ i ] += 1
-                        isolatedFile[ i ].write( '{},{}\n'.format( isolatedIndex[ i ], primes[ 1 ][ 1 ] ) )
+                if diffs[ 0 ] < diffs[ 1 ]:
+                    for i in range( 1, howStrong ):
+                        if diffs[ i ] > diffs[ i + 1 ]:
+                            if primes[ 1 ][ 1 ]> 0 and strongIndex[ i - 1 ] < maxIndex:
+                                strongIndex[ i - 1 ] += 1
+                                strongFiles[ i - 1 ].write( '{},{}\n'.format( strongIndex[ i - 1 ], primes[ 1 ][ 1 ] ) )
+                        else:
+                            break
 
-    for i in range( 0, numberOfTypes ):
-        isolatedFile[ i ].close( )
+    for i in range( 2, howStrong + 1 ):
+        strongFiles[ i - 2 ].close( )
 
 
 #//******************************************************************************

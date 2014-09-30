@@ -24,20 +24,18 @@ def loadFile( fileName ):
 def main( ):
     lineCount = 1
 
-    primesSize = 5
+    primesSize = 3
 
     primes = [ ]
     diffs = [ ]
-    adiffs = [ ]
 
     for i in range( 0, primesSize ):
         primes.append( [ -9999999, -9999999 ] )
 
     for i in range( 0, primesSize - 1 ):
         diffs.append( 0 )
-        adiffs.append( 0 )
 
-    isolatedIndex = 0
+    twinIndex = 0
 
     firstDataFile = 0
     lastDataFile = 6950
@@ -49,16 +47,6 @@ def main( ):
     while current <= lastDataFile:
         inputList.append( 'c:\\data\primes\\{:04}-{:04}.txt'.format( current, current + 50 ) )
         current += 50
-
-    numberOfTypes = 100
-
-    isolatedIndex = [ 0 ] * numberOfTypes
-    isolatedFile = [ ]
-
-    for i in range( 0, numberOfTypes ):
-        isolatedFile.append( open( 'c:\\data\primes\\isolated{:03}_primes.txt'.format( i * 2 + 4 ), 'w' ) )
-
-    printInterval = 1000000
 
     for fileName in inputList:
         with open( fileName, 'r' ) as file:
@@ -75,20 +63,11 @@ def main( ):
 
                 for i in range( 0, primesSize - 1 ):
                     sum += diffs[ i ]
-                    adiffs[ i ] = sum
 
-                if primes[ 0 ][ 0 ] % printInterval == 0:
-                    print( 'isolated: {:,}'.format( primes[ 0 ][ 0 ] ) )
+                if diffs[ 0 ] == 2:
+                    twinIndex += 1
 
-                for i in range( 0, numberOfTypes ):
-                    diff = i * 2 + 4
-
-                    if diffs[ 0 ] > diff and diffs[ 1 ] > diff and isolatedIndex[ i ] <= 1000000:
-                        isolatedIndex[ i ] += 1
-                        isolatedFile[ i ].write( '{},{}\n'.format( isolatedIndex[ i ], primes[ 1 ][ 1 ] ) )
-
-    for i in range( 0, numberOfTypes ):
-        isolatedFile[ i ].close( )
+                    print( '{},{}'.format( twinIndex, primes[ 0 ][ 1 ] ) )
 
 
 #//******************************************************************************
