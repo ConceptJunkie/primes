@@ -1,5 +1,20 @@
 #!/usr/bin/env python
 
+import contextlib
+import bz2
+import pickle
+
+
+def saveFile( var, fileName ):
+    with contextlib.closing( bz2.BZ2File( fileName + '.pckl.bz2', 'wb' ) ) as pickleFile:
+        pickle.dump( var, pickleFile )
+
+
+def loadFile( fileName ):
+    with contextlib.closing( bz2.BZ2File( fileName + 'pckl.bz2', 'rb' ) ) as pickleFile:
+        return pickle.load( pickleFile )
+
+
 #//******************************************************************************
 #//
 #//  main
@@ -10,18 +25,21 @@ def main( ):
     lineCount = 1
 
     primesSize = 11
-    center = primesSize // 2 - 1
 
     primes = [ ]
     diffs = [ ]
+    adiffs = [ ]
 
     for i in range( 0, primesSize ):
         primes.append( [ -9999999, -9999999 ] )
 
     for i in range( 0, primesSize - 1 ):
         diffs.append( 0 )
+        adiffs.append( 0 )
 
-    firstDataFile = 4400
+    tripletIndex = 0
+
+    firstDataFile = 0
     lastDataFile = 7000
 
     inputList = [ ]
@@ -31,16 +49,6 @@ def main( ):
     while current <= lastDataFile:
         inputList.append( 'c:\\data\primes\\{:04}-{:04}.txt'.format( current, current + 50 ) )
         current += 50
-
-    numberOfTypes = 5
-
-    balancedIndex = [ 0 ] * numberOfTypes
-    balancedFile = [ ]
-
-    for i in range( 0, numberOfTypes ):
-        balancedFile.append( open( 'c:\\data\primes\\balanced{:02}_primes.txt'.format( i + 1 ), 'w' ) )
-
-    printInterval = 100000
 
     for fileName in inputList:
         with open( fileName, 'r' ) as file:
@@ -55,26 +63,21 @@ def main( ):
 
                 sum = 0
 
-                if primes[ 0 ][ 0 ] % printInterval == 0:
-                    print( 'balanced: {:,}'.format( primes[ 0 ][ 0 ] ) )
+                for i in range( 0, primesSize - 1 ):
+                    sum += diffs[ i ]
+                    adiffs[ i ] = sum
 
-                for i in range( 0, numberOfTypes ):
-                    skip = False
+                #print( primes )
+                #print( diffs )
+                #print( adiffs )
 
-                    for j in range( 0, i + 1 ):
-                        if ( diffs[ center - j ] != diffs[ center + j + 1 ] ):
-                            skip = True
-                            break
+                #if primes[ 0 ][ 0 ] > 200:
+                #    return
 
-                    if skip:
-                        continue
+                if diffs[ 0 ] + diffs[ 1 ] == 6:
+                    tripletIndex += 1
 
-                    if primes[ center + 1 ][ 1 ] > 0:
-                        balancedIndex[ i ] += 1
-                        balancedFile[ i ].write( '{},{}\n'.format( balancedIndex[ i ], primes[ center + 1 ][ 1 ] ) )
-
-    for i in range( 0, numberOfTypes ):
-        balancedFile[ i ].close( )
+                    print( '{},{}'.format( tripletIndex, primes[ 0 ][ 1 ] ) )
 
 
 #//******************************************************************************
