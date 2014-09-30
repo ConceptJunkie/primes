@@ -22,7 +22,7 @@ def main( ):
         diffs.append( 0 )
 
     firstDataFile = 4400
-    lastDataFile = 7000
+    lastDataFile = 6950
 
     inputList = [ ]
 

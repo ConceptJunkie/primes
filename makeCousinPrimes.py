@@ -37,10 +37,10 @@ def main( ):
         diffs.append( 0 )
         adiffs.append( 0 )
 
-    tripletIndex = 0
+    cousinIndex = 0
 
     firstDataFile = 0
-    lastDataFile = 6950
+    lastDataFile = 950
 
     inputList = [ ]
 
@@ -67,17 +67,9 @@ def main( ):
                     sum += diffs[ i ]
                     adiffs[ i ] = sum
 
-                #print( primes )
-                #print( diffs )
-                #print( adiffs )
-
-                #if primes[ 0 ][ 0 ] > 200:
-                #    return
-
-                if diffs[ 0 ] + diffs[ 1 ] == 6:
-                    tripletIndex += 1
-
-                    print( '{},{}'.format( tripletIndex, primes[ 0 ][ 1 ] ) )
+                if ( adiffs[ 0 ] == 4 ) or ( adiffs[ 1 ] == 4 ):
+                    cousinIndex += 1
+                    print( '{},{}'.format( cousinIndex, primes[ 0 ][ 1 ] ) )
 
 
 #//******************************************************************************
