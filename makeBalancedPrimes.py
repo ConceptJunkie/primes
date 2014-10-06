@@ -21,8 +21,8 @@ def main( ):
     for i in range( 0, primesSize - 1 ):
         diffs.append( 0 )
 
-    firstDataFile = 4400
-    lastDataFile = 6950
+    firstDataFile = 0
+    lastDataFile = 7450
 
     inputList = [ ]
 
@@ -69,9 +69,9 @@ def main( ):
                     if skip:
                         continue
 
-                    if primes[ center + 1 ][ 1 ] > 0:
+                    if primes[ center - i ][ 1 ] > 0:
                         balancedIndex[ i ] += 1
-                        balancedFile[ i ].write( '{},{}\n'.format( balancedIndex[ i ], primes[ center + 1 ][ 1 ] ) )
+                        balancedFile[ i ].write( '{},{}\n'.format( balancedIndex[ i ], primes[ center - i ][ 1 ] ) )
 
     for i in range( 0, numberOfTypes ):
         balancedFile[ i ].close( )

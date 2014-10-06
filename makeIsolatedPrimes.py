@@ -50,7 +50,7 @@ def main( ):
         inputList.append( 'c:\\data\primes\\{:04}-{:04}.txt'.format( current, current + 50 ) )
         current += 50
 
-    numberOfTypes = 100
+    numberOfTypes = 200
 
     isolatedIndex = [ 0 ] * numberOfTypes
     isolatedFile = [ ]

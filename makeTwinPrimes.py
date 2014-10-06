@@ -38,7 +38,7 @@ def main( ):
     twinIndex = 0
 
     firstDataFile = 0
-    lastDataFile = 6950
+    lastDataFile = 950
 
     inputList = [ ]
 

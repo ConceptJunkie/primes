@@ -80,7 +80,7 @@ def main( ):
                 if diffs[ 0 ] < diffs[ 1 ]:
                     for i in range( 1, howWeak ):
                         if diffs[ i ] < diffs[ i + 1 ]:
-                            if primes[ 1 ][ 1 ]> 0 and WeakIndex[ i - 1 ] < maxIndex:
+                            if primes[ 1 ][ 1 ] > 0 and WeakIndex[ i - 1 ] < maxIndex:
                                 WeakIndex[ i - 1 ] += 1
                                 WeakFiles[ i - 1 ].write( '{},{}\n'.format( WeakIndex[ i - 1 ], primes[ 1 ][ 1 ] ) )
                         else:
