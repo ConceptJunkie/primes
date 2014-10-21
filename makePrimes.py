@@ -61,7 +61,7 @@ def makePrimes( n, p ):
 
             if n % 50000000 == 0:
                 file.close( )
-                return
+                return n, p
 
 
 #//******************************************************************************
@@ -79,7 +79,8 @@ def main( ):
     prime = ''.join( [ i for i in prime if i not in ',' ] )
     prime = int( prime )
 
-    makePrimes( index, prime )
+    while True:
+        index, prime = makePrimes( index, prime )
 
 
 #//******************************************************************************
