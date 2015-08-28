@@ -7,21 +7,25 @@
 #//******************************************************************************
 
 def main( ):
-    inputList = [ 'c:\\data\\primes\\0000-0050.txt', 'c:\\data\\primes\\0050-0100.txt',
-                  'c:\\data\\primes\\0100-0150.txt', 'c:\\data\\primes\\0150-0200.txt',
-                  'c:\\data\\primes\\0200-0250.txt', 'c:\\data\\primes\\0250-0300.txt',
-                  'c:\\data\\primes\\0300-0350.txt', 'c:\\data\\primes\\0350-0400.txt',
-                  'c:\\data\\primes\\0400-0450.txt', 'c:\\data\\primes\\0450-0500.txt',
-                  'c:\\data\\primes\\0500-0550.txt', 'c:\\data\\primes\\0550-0600.txt',
-                  'c:\\data\\primes\\0600-0650.txt', 'c:\\data\\primes\\0650-0700.txt',
-                  'c:\\data\\primes\\0700-0750.txt', 'c:\\data\\primes\\0750-0800.txt',
-                  'c:\\data\\primes\\0800-0850.txt', 'c:\\data\\primes\\0850-0900.txt',
-                  'c:\\data\\primes\\0900-0950.txt', 'c:\\data\\primes\\0950-1000.txt' ]
+    lineCount = 1
 
-    diffsFile = open( 'c:\\data\primes\\prime_diffs-0000-0050.txt', 'w' )
+    firstDataFile = 6000
+    lastDataFile = 10000
 
     previousPrime = -9999999
-    printInterval = 10000000
+
+    inputList = [ ]
+
+    diffsFile = open( 'c:\\data\primes\\prime_diffs-6900-6950.txt', 'w' )
+    printInterval = 10000
+
+    print( )
+
+    current = firstDataFile
+
+    while current <= lastDataFile:
+        inputList.append( 'c:\\data\primes\\{:04}-{:04}.txt'.format( current, current + 50 ) )
+        current += 50
 
     for fileName in inputList:
         with open( fileName, 'r' ) as file:
@@ -40,7 +44,7 @@ def main( ):
                 previousPrime = prime
 
                 if index % printInterval == 0:
-                    print( '{:,}'.format( index ) )
+                    print( '\r{:,}'.format( index ), end='' )
 
                 if index % 50000000 == 1:
                     diffsFile.close( )
