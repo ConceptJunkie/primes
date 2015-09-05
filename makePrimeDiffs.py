@@ -10,13 +10,13 @@ def main( ):
     lineCount = 1
 
     firstDataFile = 6000
-    lastDataFile = 10000
+    lastDataFile = 12000
 
     previousPrime = -9999999
 
     inputList = [ ]
 
-    diffsFile = open( 'c:\\data\primes\\prime_diffs-6900-6950.txt', 'w' )
+    diffsFile = open( 'c:\\data\primes\\prime_diffs-{:05}-{:05}.txt'.format( firstDataFile, firstDataFile + 50 ), 'w' )
     printInterval = 10000
 
     print( )
@@ -24,7 +24,7 @@ def main( ):
     current = firstDataFile
 
     while current <= lastDataFile:
-        inputList.append( 'c:\\data\primes\\{:04}-{:04}.txt'.format( current, current + 50 ) )
+        inputList.append( 'c:\\data\primes\\{:05}-{:05}.txt'.format( current, current + 50 ) )
         current += 50
 
     for fileName in inputList:
@@ -51,7 +51,7 @@ def main( ):
 
                     fileNum = index // 1000000
 
-                    diffsFile = open( 'c:\\data\primes\\prime_diffs-{:04}-{:04}.txt'.format( fileNum, fileNum + 50 ), 'w' )
+                    diffsFile = open( 'c:\\data\primes\\prime_diffs-{:05}-{:05}.txt'.format( fileNum, fileNum + 50 ), 'w' )
 
     diffsFile.close( )
 
