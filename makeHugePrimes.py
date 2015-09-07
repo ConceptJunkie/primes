@@ -9,14 +9,14 @@
 def main( ):
     lineCount = 1
 
-    firstDataFile = 0
-    lastDataFile = 950
+    firstDataFile = 1000
+    lastDataFile = 12000
 
     previousPrime = -9999999
 
     inputList = [ ]
 
-    largeFile = open( 'c:\\data\\primes\\large_primes.txt', 'w' )
+    hugeFile = open( 'c:\\data\\primes\\huge_primes.txt', 'w' )
     printInterval = 10000
 
     print( )
@@ -35,20 +35,13 @@ def main( ):
                 index = int( items[ 0 ] )
                 prime = int( items[ 1 ] )
 
-                if index < 1000000:
-                    continue
-
-                if index > 10000000:
-                    if index % 1000 == 0:
-                        largeFile.write( '{:12}: {},\n'.format( index, prime ) )
-                else:
-                    if index % 100 == 0:
-                        largeFile.write( '{:12}: {},\n'.format( index, prime ) )
+                if index % 10000 == 0:
+                    hugeFile.write( '{:12}: {},\n'.format( index, prime ) )
 
                 if index % printInterval == 0:
                     print( '\r{:,}'.format( index ), end='' )
 
-    largeFile.close( )
+    hugeFile.close( )
 
 
 #//******************************************************************************
