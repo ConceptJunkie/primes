@@ -9,8 +9,8 @@
 def main( ):
     lineCount = 1
 
-    firstDataFile = 1000
-    lastDataFile = 12000
+    firstDataFile = 12000
+    lastDataFile = 15000
 
     previousPrime = -9999999
 
@@ -36,7 +36,7 @@ def main( ):
                 prime = int( items[ 1 ] )
 
                 if index % 10000 == 0:
-                    hugeFile.write( '{:12}: {},\n'.format( index, prime ) )
+                    hugeFile.write( '{:12} {}\n'.format( index, prime ) )
 
                 if index % printInterval == 0:
                     print( '\r{:,}'.format( index ), end='' )
