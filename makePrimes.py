@@ -89,7 +89,7 @@ def getNextPrimeCandidate( p ):
 #//
 #//******************************************************************************
 
-batchSize = 1000000
+batchSize = 100000
 
 def makePrimeBatch( start ):
     p = getNextPrimeCandidate( start )
@@ -112,7 +112,7 @@ def makePrimeBatch( start ):
 #//
 #//******************************************************************************
 
-def makePrimes( index, prime, count ):
+def makePrimes( index, prime, count, max_workers=8 ):
     fileName = '{:05}-{:05}.txt'.format( index // 1000000, index // 1000000 + 50 )
     file = open( fileName, "w" )
 
@@ -122,7 +122,7 @@ def makePrimes( index, prime, count ):
     while True:
         primes = [ ]
 
-        with concurrent.futures.ProcessPoolExecutor( max_workers=6 ) as executor:
+        with concurrent.futures.ProcessPoolExecutor( max_workers=max_workers ) as executor:
             for batch in executor.map( makePrimeBatch, range( p, p + batchSize * 100, batchSize ) ):
                 primes.extend( batch )
 
@@ -160,7 +160,7 @@ def main( ):
     print( )
 
     while True:
-        index, prime = makePrimes( index, prime, 50000000 )
+        index, prime = makePrimes( index, prime, 50000000, 4 )
 
 
 #//******************************************************************************
