@@ -47,7 +47,7 @@ def main( ):
     current = firstDataFile
 
     while current <= lastDataFile:
-        inputList.append( 'c:\\data\primes\\{:04}-{:04}.txt'.format( current, current + 50 ) )
+        inputList.append( 'c:\\data\primes\\{:05}-{:05}.txt'.format( current, current + 50 ) )
         current += 50
 
     for fileName in inputList:
