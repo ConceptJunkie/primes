@@ -11,7 +11,7 @@ import sys
 #//
 #//******************************************************************************
 
-def isPrime( arg ):
+def isPrime( n ):
     return True if gmpy2.is_bpsw_prp( n ) else False
 
 
