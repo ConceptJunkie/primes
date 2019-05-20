@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import concurrent.futures
-import pyprimes
+import gmpy2
 import sys
 
 
@@ -12,7 +12,7 @@ import sys
 #//******************************************************************************
 
 def isPrime( arg ):
-    return pyprimes.isprime( arg )
+    return True if gmpy2.is_bpsw_prp( n ) else False
 
 
 # //******************************************************************************
@@ -149,6 +149,9 @@ def makePrimes( index, prime, count, max_workers=8 ):
 #//******************************************************************************
 
 def main( ):
+    if sys.argc < 3:
+        print( 'usage:  makePrimes index prime' )
+
     index = sys.argv[ 1 ]
     index = ''.join( [ i for i in index if i not in ',' ] )
     index = int( index )
