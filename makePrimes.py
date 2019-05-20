@@ -149,7 +149,7 @@ def makePrimes( index, prime, count, max_workers=8 ):
 #//******************************************************************************
 
 def main( ):
-    if sys.argc < 3:
+    if len( sys.argv ) < 3:
         print( 'usage:  makePrimes index prime' )
 
     index = sys.argv[ 1 ]
