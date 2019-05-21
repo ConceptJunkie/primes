@@ -137,7 +137,7 @@ nextPrimeModuloTable = [
     10, 9, 8, 7, 6, 5, 4, 3, 2
 ]
 
-def getNextPrimeCandidateForAny( p ):
+def getNextPrimeCandidate( p ):
     f = int( ( p - 10 ) % 210 )
     return p + nextPrimeModuloTable[ f ]
 
@@ -154,7 +154,10 @@ def makePrimeBatch( start ):
     p = getNextPrimeCandidate( start )
     stop = start + batchSize
 
-    primes = [ ]
+    if start < 11:
+        primes = [ 2, 3, 5, 7 ]
+    else:
+        primes = [ ]
 
     while p <= stop:
         if isPrime( p ):
@@ -171,7 +174,7 @@ def makePrimeBatch( start ):
 #//
 #//******************************************************************************
 
-def makePrimes( index, prime, count, limit=index + count, max_workers=8 ):
+def makePrimes( index, prime, count, max_workers=8 ):
     fileName = '{:05}-{:05}.txt'.format( index // 1000000, index // 1000000 + 50 )
     file = open( fileName, "w" )
 
@@ -200,9 +203,6 @@ def makePrimes( index, prime, count, limit=index + count, max_workers=8 ):
 
         p = finished[ -1 ]
 
-        if n >= limit:
-            break
-
 
 #//******************************************************************************
 #//
@@ -221,6 +221,10 @@ def main( ):
     prime = sys.argv[ 2 ]
     prime = ''.join( [ i for i in prime if i not in ',' ] )
     prime = int( prime )
+
+    if index <= 4 or prime < 11:
+        index = 0
+        prime = 1
 
     print( )
 
