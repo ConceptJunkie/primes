@@ -12,26 +12,45 @@ from primeDataUtils import readPrimeNumbers
 #//******************************************************************************
 
 def main( ):
-    firstDataFile = 15000
-    lastDataFile = 29950
+    lineCount = 1
 
-    outputInterval = 25000
+    diffs = [ 0 ] * 3
+
+    sexyQuadIndex = 0
+
+    firstDataFile = 0
+    lastDataFile = 50
+
+    outputInterval = 100
     printInterval = 100000
+
+    previousPrime = 1
 
     directory = 'g:\\primes'
 
     print( )
 
-    hugeFile = open( directory + os.sep + 'huge_primes.txt', 'w' )
+    sexyQuadFile = open( directory + os.sep + 'sexy_quadruplets.txt', 'w' )
 
     for index, prime in readPrimeNumbers( 'g:\\primes', firstDataFile, lastDataFile ):
-        if index % outputInterval == 0:
-            hugeFile.write( '{:12} {}\n'.format( index, prime ) )
+        if index == 1000000000:
+            outputInterval = 1000
+
+        diffs.append( prime - previousPrime )
+        del diffs[ 0 ]
+
+        previousPrime = prime
 
         if index % printInterval == 0:
             print( '\r{:,}'.format( index ), end='' )
 
-    hugeFile.close( )
+        if diffs == [ 6, 6, 6 ]:
+            sexyQuadIndex += 1
+
+            if sexyQuadIndex % outputInterval == 0:
+                sexyQuadFile.write( '{} {}\n'.format( sexyQuadIndex, prime - 18 ) )  # 18 because 3 * 6
+
+    sexyQuadFile.close( )
 
 
 #//******************************************************************************

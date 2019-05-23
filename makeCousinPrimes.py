@@ -1,18 +1,8 @@
 #!/usr/bin/env python
 
-import contextlib
-import bz2
-import pickle
+import os
 
-
-def saveFile( var, fileName ):
-    with contextlib.closing( bz2.BZ2File( fileName + '.pckl.bz2', 'wb' ) ) as pickleFile:
-        pickle.dump( var, pickleFile )
-
-
-def loadFile( fileName ):
-    with contextlib.closing( bz2.BZ2File( fileName + 'pckl.bz2', 'rb' ) ) as pickleFile:
-        return pickle.load( pickleFile )
+from primeDataUtils import readPrimeNumbers
 
 
 #//******************************************************************************
@@ -24,52 +14,42 @@ def loadFile( fileName ):
 def main( ):
     lineCount = 1
 
-    primesSize = 11
-
-    primes = [ ]
-    diffs = [ ]
-    adiffs = [ ]
-
-    for i in range( 0, primesSize ):
-        primes.append( [ -9999999, -9999999 ] )
-
-    for i in range( 0, primesSize - 1 ):
-        diffs.append( 0 )
-        adiffs.append( 0 )
+    diff = 0
 
     cousinIndex = 0
 
     firstDataFile = 0
-    lastDataFile = 950
+    lastDataFile = 50
 
-    inputList = [ ]
+    outputInterval = 100
+    printInterval = 100000
 
-    current = firstDataFile
+    previousPrime = 1
 
-    while current <= lastDataFile:
-        inputList.append( 'c:\\data\primes\\{:04}-{:04}.txt'.format( current, current + 50 ) )
-        current += 50
+    directory = 'g:\\primes'
 
-    for fileName in inputList:
-        with open( fileName, 'r' ) as file:
-            for line in file:
-                items = line[ : -1 ].split( ',' )
+    print( )
 
-                primes.append( [ int( items[ 0 ] ), int( items[ 1 ] ) ] )
-                del primes[ 0 ]
+    cousinFile = open( directory + os.sep + 'cousin_primes.txt', 'w' )
 
-                diffs.append( primes[ -1 ][ 1 ] - primes[ -2 ][ 1 ] )
-                del diffs[ 0 ]
+    for index, prime in readPrimeNumbers( 'g:\\primes', firstDataFile, lastDataFile ):
+        if index == 1000000000:
+            outputInterval = 1000
 
-                sum = 0
+        diff = prime - previousPrime
 
-                for i in range( 0, primesSize - 1 ):
-                    sum += diffs[ i ]
-                    adiffs[ i ] = sum
+        previousPrime = prime
 
-                if ( adiffs[ 0 ] == 4 ) or ( adiffs[ 1 ] == 4 ):
-                    cousinIndex += 1
-                    print( '{},{}'.format( cousinIndex, primes[ 0 ][ 1 ] ) )
+        if index % printInterval == 0:
+            print( '\r{:,}'.format( index ), end='' )
+
+        if diff == 4:
+            cousinIndex += 1
+
+            if cousinIndex % outputInterval == 0:
+                cousinFile.write( '{:12} {}\n'.format( cousinIndex, prime - 4 ) )
+
+    cousinFile.close( )
 
 
 #//******************************************************************************

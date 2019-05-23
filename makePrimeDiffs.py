@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+import os
+
+from primeDataUtils import readPrimeNumbers
+
+
 #//******************************************************************************
 #//
 #//  main
@@ -7,51 +12,36 @@
 #//******************************************************************************
 
 def main( ):
-    lineCount = 1
-
-    firstDataFile = 6000
-    lastDataFile = 12000
+    firstDataFile = 0
+    lastDataFile = 9950
 
     previousPrime = -9999999
-
-    inputList = [ ]
-
-    diffsFile = open( 'c:\\data\primes\\prime_diffs-{:05}-{:05}.txt'.format( firstDataFile, firstDataFile + 50 ), 'w' )
     printInterval = 10000
+
+    directory = 'g:\\primes'
+
+    diffsFile = open( directory + os.sep + 'prime_diffs-{:05}-{:05}.txt'.format( firstDataFile, firstDataFile + 50 ), 'w' )
 
     print( )
 
-    current = firstDataFile
+    for index, prime in readPrimeNumbers( 'g:\\primes', firstDataFile, lastDataFile ):
+        if previousPrime == -9999999:
+            previousPrime = prime
+            continue
 
-    while current <= lastDataFile:
-        inputList.append( 'c:\\data\primes\\{:05}-{:05}.txt'.format( current, current + 50 ) )
-        current += 50
+        diffsFile.write( '{},{}\n'.format( index - 1, prime - previousPrime ) )
 
-    for fileName in inputList:
-        with open( fileName, 'r' ) as file:
-            for line in file:
-                items = line[ : -1 ].split( ',' )
+        previousPrime = prime
 
-                if previousPrime == -9999999:
-                    previousPrime = int( items[ 1 ] )
-                    continue
+        if index % printInterval == 0:
+            print( '\r{:,}'.format( index ), end='' )
 
-                index = int( items[ 0 ] )
-                prime = int( items[ 1 ] )
+        if index % 50000000 == 1:
+            diffsFile.close( )
 
-                diffsFile.write( '{},{}\n'.format( index - 1, prime - previousPrime ) )
+            fileNum = index // 1000000
 
-                previousPrime = prime
-
-                if index % printInterval == 0:
-                    print( '\r{:,}'.format( index ), end='' )
-
-                if index % 50000000 == 1:
-                    diffsFile.close( )
-
-                    fileNum = index // 1000000
-
-                    diffsFile = open( 'c:\\data\primes\\prime_diffs-{:05}-{:05}.txt'.format( fileNum, fileNum + 50 ), 'w' )
+            diffsFile = open( directory + os.sep + 'prime_diffs-{:05}-{:05}.txt'.format( fileNum, fileNum + 50 ), 'w' )
 
     diffsFile.close( )
 

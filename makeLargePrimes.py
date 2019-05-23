@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+import os
+
+from primeDataUtils import readPrimeNumbers
+
+
 #//******************************************************************************
 #//
 #//  main
@@ -7,46 +12,30 @@
 #//******************************************************************************
 
 def main( ):
-    lineCount = 1
-
     firstDataFile = 0
     lastDataFile = 950
 
-    previousPrime = -9999999
+    outputInterval = 100
+    printInterval = 100000
 
-    inputList = [ ]
-
-    largeFile = open( 'c:\\data\\primes\\large_primes.txt', 'w' )
-    printInterval = 10000
+    directory = 'g:\\primes'
 
     print( )
 
-    current = firstDataFile
+    largeFile = open( directory + os.sep + 'large_primes.txt', 'w' )
 
-    while current <= lastDataFile:
-        inputList.append( 'c:\\data\\primes\\primes\\{:05}-{:05}.txt'.format( current, current + 50 ) )
-        current += 50
+    for index, prime in readPrimeNumbers( 'g:\\primes', firstDataFile, lastDataFile ):
+        if index < 1000000:
+            continue
 
-    for fileName in inputList:
-        with open( fileName, 'r' ) as file:
-            for line in file:
-                items = line[ : -1 ].split( ',' )
+        if index == 10000000:
+            outputInterval = 1000;
 
-                index = int( items[ 0 ] )
-                prime = int( items[ 1 ] )
+        if index % outputInterval == 0:
+            largeFile.write( '{:12} {}\n'.format( index, prime ) )
 
-                if index < 1000000:
-                    continue
-
-                if index > 10000000:
-                    if index % 1000 == 0:
-                        largeFile.write( '{:12}: {},\n'.format( index, prime ) )
-                else:
-                    if index % 100 == 0:
-                        largeFile.write( '{:12}: {},\n'.format( index, prime ) )
-
-                if index % printInterval == 0:
-                    print( '\r{:,}'.format( index ), end='' )
+        if index % printInterval == 0:
+            print( '\r{:,}'.format( index ), end='' )
 
     largeFile.close( )
 
