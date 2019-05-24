@@ -66,7 +66,7 @@ def main( ):
         sexyPrimeIndex += 1
 
         if sexyPrimeIndex % outputInterval == 0:
-            sexyPrimeFile.write( '{} {}\n'.format( sexyPrimeIndex, prime - 18 ) )  # 18 because 3 * 6
+            sexyPrimeFile.write( '{:12} {}\n'.format( sexyPrimeIndex, prime - 6 ) )
 
         if b12:
             if b18:
@@ -74,13 +74,13 @@ def main( ):
                 sexyQuadIndex += 1
 
                 if sexyQuadIndex % outputInterval == 0:
-                    sexyQuadFile.write( '{} {}\n'.format( sexyQuadIndex, prime - 18 ) )  # 18 because 3 * 6
+                    sexyQuadFile.write( '{:12} {}\n'.format( sexyQuadIndex, prime - 18 ) )  # 18 because 3 * 6
             else:
                 # we found a sexy triplet
                 sexyTripletIndex += 1
 
                 if sexyTripletIndex % outputInterval == 0:
-                    sexyTripletFile.write( '{} {}\n'.format( sexyTripletIndex, prime - 12 ) )  # 12 because 2 * 6
+                    sexyTripletFile.write( '{:12} {}\n'.format( sexyTripletIndex, prime - 12 ) )  # 12 because 2 * 6
 
     sexyQuadFile.close( )
 

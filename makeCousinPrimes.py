@@ -19,7 +19,7 @@ def main( ):
     cousinIndex = 0
 
     firstDataFile = 0
-    lastDataFile = 50
+    lastDataFile = 950
 
     outputInterval = 100
     printInterval = 100000

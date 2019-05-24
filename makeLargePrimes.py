@@ -34,6 +34,9 @@ def main( ):
         if index % outputInterval == 0:
             largeFile.write( '{:12} {}\n'.format( index, prime ) )
 
+        if index == 1000000000:
+            break
+
         if index % printInterval == 0:
             print( '\r{:,}'.format( index ), end='' )
 
