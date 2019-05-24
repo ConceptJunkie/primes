@@ -1,18 +1,9 @@
 #!/usr/bin/env python
 
 import concurrent.futures
-import gmpy2
 import sys
 
-
-#//******************************************************************************
-#//
-#//  isPrime
-#//
-#//******************************************************************************
-
-def isPrime( n ):
-    return True if gmpy2.is_bpsw_prp( n ) else False
+from primeDataUtils import isPrime
 
 
 # //******************************************************************************
