@@ -14,7 +14,7 @@ from primeDataUtils import readPrimeNumbers
 def main( ):
     lineCount = 1
 
-    primes = [ 0 ] * 8
+    primes = [ -1 ] * 8  # otherwise it thinks 0 and 2 are twin primes
     diffs = [ 0 ] * 7
 
     twinIndex = 0
@@ -44,6 +44,12 @@ def main( ):
     quintFile = open( directory + os.sep + 'quint_primes.txt', 'w' )
     sextFile = open( directory + os.sep + 'sext_primes.txt', 'w' )
 
+    quadIndex += 1
+    quadFile.write( '{:12} {}\n'.format( 1, 5 ) )
+
+    quintIndex += 1
+    quintFile.write( '{:12} {}\n'.format( 1, 5 ) )
+
     for index, prime in readPrimeNumbers( 'g:\\primes', firstDataFile, lastDataFile ):
         if index % printInterval == 0:
             print( '\r{:,}'.format( index ), end='' )
@@ -68,7 +74,7 @@ def main( ):
                 twinInterval = 10000
 
             if twinIndex % twinInterval == 0:
-                twinFile.write( '{:12} {}\n'.format( twinIndex, prime - 4 ) )
+                twinFile.write( '{:12} {}\n'.format( twinIndex, prime - 2 ) )
 
         # them check for a triplet
         if ( diffs[ -1 ] == 2 and diffs[ -2 ] == 4 ) or \
@@ -90,11 +96,11 @@ def main( ):
            diffs[ -1 ] == 2 and diffs[ -2 ] == 4 and diffs[ -3 ] == 2:
             quadIndex += 1
 
-            if quadIndex == 100000:
+            if quadIndex == 10000:
                 quadInterval = 5
-            elif quadIndex == 1000000:
+            elif quadIndex == 100000:
                 quadInterval = 20
-            elif quadIndex == 10000000:
+            elif quadIndex == 1000000:
                 quadInterval = 100
 
             if quadIndex % quadInterval == 0:
@@ -103,10 +109,12 @@ def main( ):
             if diffs[ -4 ] == 4:
                 quintIndex += 1
 
-                if quintIndex == 100000:
+                if quintIndex == 10000:
                     quintIndex = 5
-                elif quintIndex == 1000000:
+                elif quintIndex == 100000:
                     quintInterval = 20
+                elif quintIndex == 1000000:
+                    quintInterval = 100
 
                 if quintIndex % quintInterval == 0:
                     quintFile.write( '{:12} {}\n'.format( quintIndex, prime - 12 ) )
@@ -115,10 +123,12 @@ def main( ):
            diffs[ -1 ] == 4 and diffs[ -2 ] == 2 and diffs[ -3 ] == 4 and diffs[ -4 ] == 2:
             quintIndex += 1
 
-            if quintIndex == 100000:
+            if quintIndex == 10000:
                 quintIndex = 5
-            elif quintIndex == 1000000:
+            elif quintIndex == 100000:
                 quintInterval = 20
+            elif quintIndex == 1000000:
+                quintInterval = 100
 
             if quintIndex % quintInterval == 0:
                 quintFile.write( '{:12} {}\n'.format( quintIndex, prime - 12 ) )
@@ -130,7 +140,11 @@ def main( ):
                 if sextIndex % sextInterval == 0:
                     sextFile.write( '{:12} {}\n'.format( sextIndex, prime - 16 ) )
 
-    sexyQuadFile.close( )
+    twinFile.close( )
+    tripletFile.close( )
+    quadFile.close( )
+    quintFile.close( )
+    sextFile.close( )
 
 
 #//******************************************************************************

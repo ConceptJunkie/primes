@@ -14,7 +14,9 @@ from primeDataUtils import readPrimeNumbers
 def main( ):
     lineCount = 1
 
-    primesSize = 11
+    numberOfTypes = 5
+
+    primesSize = numberOfTypes * 2 + 1
     center = primesSize // 2 - 1
 
     primes = [ ]
@@ -31,8 +33,6 @@ def main( ):
 
     directory = 'g:\\primes'
 
-    numberOfTypes = 5
-
     balancedIndex = [ 0 ] * numberOfTypes
     balancedFile = [ ]
 
@@ -40,6 +40,7 @@ def main( ):
         balancedFile.append( open( directory + os.sep + 'balanced{:02}_primes.txt'.format( i + 1 ), 'w' ) )
 
     printInterval = 100000
+    outputInterval = 100
 
     for index, prime in readPrimeNumbers( 'g:\\primes', firstDataFile, lastDataFile ):
         primes.append( [ index, prime ] )
@@ -50,8 +51,8 @@ def main( ):
 
         sum = 0
 
-        if primes[ 0 ][ 0 ] % printInterval == 0:
-            print( 'balanced: {:,}'.format( primes[ 0 ][ 0 ] ) )
+        if index % printInterval == 0:
+            print( '\r{:,}'.format( index ), end='' )
 
         for i in range( 0, numberOfTypes ):
             skip = False
@@ -66,7 +67,9 @@ def main( ):
 
             if primes[ center - i ][ 1 ] > 0:
                 balancedIndex[ i ] += 1
-                balancedFile[ i ].write( '{:12} {}\n'.format( balancedIndex[ i ], primes[ center - i ][ 1 ] ) )
+
+                if balancedIndex[ i ] % outputInterval:
+                    balancedFile[ i ].write( '{:12} {}\n'.format( balancedIndex[ i ], primes[ center - i ][ 1 ] ) )
 
     for i in range( 0, numberOfTypes ):
         balancedFile[ i ].close( )

@@ -23,7 +23,7 @@ def main( ):
     firstDataFile = 0
     lastDataFile = 950
 
-    outputInterval = 100
+    outputInterval = 1
     printInterval = 100000
 
     directory = 'g:\\primes'
@@ -35,7 +35,11 @@ def main( ):
     sexyQuadFile = open( directory + os.sep + 'sexy_quadruplets.txt', 'w' )
 
     for index, prime in readPrimeNumbers( 'g:\\primes', firstDataFile, lastDataFile ):
-        if index == 1000000000:
+        if index == 100:
+            outputInterval = 10
+        elif index == 10000:
+            outputInterval = 100
+        elif index == 1000000:
             outputInterval = 1000
 
         if index % printInterval == 0:
