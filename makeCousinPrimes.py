@@ -2,7 +2,7 @@
 
 import os
 
-from primeDataUtils import readPrimeNumbers
+from primeDataUtils import outputDirectory, readPrimeNumbers
 
 
 #//******************************************************************************
@@ -26,13 +26,11 @@ def main( ):
 
     previousPrime = 1
 
-    directory = 'g:\\primes'
-
     print( )
 
-    cousinFile = open( directory + os.sep + 'cousin_primes.txt', 'w' )
+    cousinFile = open( outputDirectory + os.sep + 'cousin_primes.txt', 'w' )
 
-    for index, prime in readPrimeNumbers( 'g:\\primes', firstDataFile, lastDataFile ):
+    for index, prime in readPrimeNumbers( firstDataFile, lastDataFile ):
         if index == 1000000000:
             outputInterval = 1000
 

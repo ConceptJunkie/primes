@@ -2,7 +2,7 @@
 
 import os
 
-from primeDataUtils import readPrimeNumbers
+from primeDataUtils import outputDirectory, readPrimeNumbers
 
 
 #//******************************************************************************
@@ -34,15 +34,13 @@ def main( ):
 
     printInterval = 100000
 
-    directory = 'g:\\primes'
-
     print( )
 
-    twinFile = open( directory + os.sep + 'twin_primes.txt', 'w' )
-    tripletFile = open( directory + os.sep + 'triplet_primes.txt', 'w' )
-    quadFile = open( directory + os.sep + 'quad_primes.txt', 'w' )
-    quintFile = open( directory + os.sep + 'quint_primes.txt', 'w' )
-    sextFile = open( directory + os.sep + 'sext_primes.txt', 'w' )
+    twinFile = open( outputDirectory + os.sep + 'twin_primes.txt', 'w' )
+    tripletFile = open( outputDirectory + os.sep + 'triplet_primes.txt', 'w' )
+    quadFile = open( outputDirectory + os.sep + 'quad_primes.txt', 'w' )
+    quintFile = open( outputDirectory + os.sep + 'quint_primes.txt', 'w' )
+    sextFile = open( outputDirectory + os.sep + 'sext_primes.txt', 'w' )
 
     quadIndex += 1
     quadFile.write( '{:12} {}\n'.format( 1, 5 ) )
@@ -50,7 +48,7 @@ def main( ):
     quintIndex += 1
     quintFile.write( '{:12} {}\n'.format( 1, 5 ) )
 
-    for index, prime in readPrimeNumbers( 'g:\\primes', firstDataFile, lastDataFile ):
+    for index, prime in readPrimeNumbers( firstDataFile, lastDataFile ):
         if index % printInterval == 0:
             print( '\r{:,}'.format( index ), end='' )
 
@@ -65,13 +63,13 @@ def main( ):
             twinIndex += 1
 
             if twinIndex == 10000000:
-                twinInterval = 300
-            elif twinIndex == 100000000:
                 twinInterval = 1000
-            elif twinIndex == 1000000000:
+            elif twinIndex == 100000000:
                 twinInterval = 3000
-            elif twinIndex == 10000000000:
+            elif twinIndex == 1000000000:
                 twinInterval = 10000
+            elif twinIndex == 10000000000:
+                twinInterval = 30000
 
             if twinIndex % twinInterval == 0:
                 twinFile.write( '{:12} {}\n'.format( twinIndex, prime - 2 ) )
@@ -110,7 +108,7 @@ def main( ):
                 quintIndex += 1
 
                 if quintIndex == 10000:
-                    quintIndex = 5
+                    quintInterval = 5
                 elif quintIndex == 100000:
                     quintInterval = 20
                 elif quintIndex == 1000000:

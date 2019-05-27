@@ -1,18 +1,8 @@
 #!/usr/bin/env python
 
-import contextlib
-import bz2
-import pickle
+import os
 
-
-def saveFile( var, fileName ):
-    with contextlib.closing( bz2.BZ2File( fileName + '.pckl.bz2', 'wb' ) ) as pickleFile:
-        pickle.dump( var, pickleFile )
-
-
-def loadFile( fileName ):
-    with contextlib.closing( bz2.BZ2File( fileName + 'pckl.bz2', 'rb' ) ) as pickleFile:
-        return pickle.load( pickleFile )
+from primeDataUtils import outputDirectory, readPrimeNumbers
 
 
 #//******************************************************************************
@@ -54,7 +44,7 @@ def main( ):
     WeakFiles = [ ]
 
     for i in range( 2, howWeak + 1 ):
-        WeakFiles.append( open( 'c:\\data\primes\\Weak{:02}_primes.txt'.format( i ), 'w' ) )
+        WeakFiles.append( open( outputDirectory + os.sep + 'weak_primes_{:02}.txt'.format( i ), 'w' ) )
 
     printInterval = 1000000
 
@@ -72,7 +62,7 @@ def main( ):
                 sum = 0
 
                 if primes[ 0 ][ 0 ] % printInterval == 0:
-                    print( 'Weak: {:,}'.format( primes[ 0 ][ 0 ] ) )
+                    print( '\r{:,}'.format( index ), end='' )
 
                 #if primes[ 0 ][ 0 ] > 10000000:
                 #    break

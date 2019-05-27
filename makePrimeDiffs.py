@@ -2,7 +2,7 @@
 
 import os
 
-from primeDataUtils import readPrimeNumbers
+from primeDataUtils import outputDirectory, readPrimeNumbers
 
 
 #//******************************************************************************
@@ -18,13 +18,11 @@ def main( ):
     previousPrime = -9999999
     printInterval = 10000
 
-    directory = 'g:\\primes'
-
-    diffsFile = open( directory + os.sep + 'prime_diffs-{:05}-{:05}.txt'.format( firstDataFile, firstDataFile + 50 ), 'w' )
+    diffsFile = open( outputDirectory + os.sep + 'prime_diffs-{:05}-{:05}.txt'.format( firstDataFile, firstDataFile + 50 ), 'w' )
 
     print( )
 
-    for index, prime in readPrimeNumbers( 'g:\\primes', firstDataFile, lastDataFile ):
+    for index, prime in readPrimeNumbers( firstDataFile, lastDataFile ):
         if previousPrime == -9999999:
             previousPrime = prime
             continue
@@ -41,7 +39,7 @@ def main( ):
 
             fileNum = index // 1000000
 
-            diffsFile = open( directory + os.sep + 'prime_diffs-{:05}-{:05}.txt'.format( fileNum, fileNum + 50 ), 'w' )
+            diffsFile = open( outputDirectory + os.sep + 'prime_diffs-{:05}-{:05}.txt'.format( fileNum, fileNum + 50 ), 'w' )
 
     diffsFile.close( )
 

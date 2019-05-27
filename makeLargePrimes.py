@@ -2,7 +2,7 @@
 
 import os
 
-from primeDataUtils import readPrimeNumbers
+from primeDataUtils import outputDirectory, readPrimeNumbers
 
 
 #//******************************************************************************
@@ -18,13 +18,11 @@ def main( ):
     outputInterval = 100
     printInterval = 100000
 
-    directory = 'g:\\primes'
-
     print( )
 
-    largeFile = open( directory + os.sep + 'large_primes.txt', 'w' )
+    largeFile = open( outputDirectory + os.sep + 'large_primes.txt', 'w' )
 
-    for index, prime in readPrimeNumbers( 'g:\\primes', firstDataFile, lastDataFile ):
+    for index, prime in readPrimeNumbers( ):
         if index < 1000000:
             continue
 

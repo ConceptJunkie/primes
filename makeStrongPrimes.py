@@ -2,7 +2,7 @@
 
 import os
 
-from primeDataUtils import readPrimeNumbers
+from primeDataUtils import outputDirectory, readPrimeNumbers
 
 
 #//******************************************************************************
@@ -14,9 +14,11 @@ from primeDataUtils import readPrimeNumbers
 def main( ):
     lineCount = 1
 
-    howStrong = 10
+    howStrong = 12
     maxIndex = 1000000
     primesSize = howStrong + 2
+
+    outputIntervals = [ 1000, 1000, 1000, 500, 100, 10, 1, 1, 1, 1, 1 ]
 
     primes = [ ]
     diffs = [ ]
@@ -26,25 +28,21 @@ def main( ):
 
     primes = [ [ -9999999, -9999999 ] ] * primesSize
 
-    for i in range( 0, primesSize - 1 ):
-        diffs = [ 0 ] * ( primesSize - 1 )
+    diffs = [ 0 ] * ( primesSize - 1 )
 
     firstDataFile = 0
-    lastDataFile = 950
-
-    directory = 'g:\\primes'
+    lastDataFile = 9950
 
     print( )
 
     strongFiles = [ ]
 
     for i in range( 2, howStrong + 1 ):
-        strongFiles.append( open( directory + os.sep + 'strong{:02}_primes.txt'.format( i ), 'w' ) )
+        strongFiles.append( open( outputDirectory + os.sep + 'strong{:02}_primes.txt'.format( i ), 'w' ) )
 
     printInterval = 100000
-    outputInterval = 100
 
-    for index, prime in readPrimeNumbers( 'g:\\primes', firstDataFile, lastDataFile ):
+    for index, prime in readPrimeNumbers( firstDataFile, lastDataFile ):
         primes.append( [ index, prime ] )
         del primes[ 0 ]
 
@@ -62,8 +60,8 @@ def main( ):
                     if primes[ 1 ][ 1 ] > 0 and strongIndex[ i - 1 ] < maxIndex:
                         strongIndex[ i - 1 ] += 1
 
-                        if strongIndex[ i - 1 ] % outputInterval == 0:
-                            strongFiles[ i - 1 ].write( '{},{}\n'.format( strongIndex[ i - 1 ], primes[ 1 ][ 1 ] ) )
+                        if strongIndex[ i - 1 ] % outputIntervals[ i - 1 ] == 0:
+                            strongFiles[ i - 1 ].write( '{:12} {}\n'.format( strongIndex[ i - 1 ], primes[ 1 ][ 1 ] ) )
                 else:
                     break
 
