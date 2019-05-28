@@ -23,9 +23,6 @@ def main( ):
     quintIndex = 0
     sextIndex = 0
 
-    firstDataFile = 0
-    lastDataFile = 950
-
     twinInterval = 100
     tripletInterval = 100
     quadInterval = 1
@@ -48,7 +45,7 @@ def main( ):
     quintIndex += 1
     quintFile.write( '{:12} {}\n'.format( 1, 5 ) )
 
-    for index, prime in readPrimeNumbers( firstDataFile, lastDataFile ):
+    for index, prime in readPrimeNumbers( ):
         if index % printInterval == 0:
             print( '\r{:,}'.format( index ), end='' )
 
@@ -122,7 +119,7 @@ def main( ):
             quintIndex += 1
 
             if quintIndex == 10000:
-                quintIndex = 5
+                quintInterval = 5
             elif quintIndex == 100000:
                 quintInterval = 20
             elif quintIndex == 1000000:

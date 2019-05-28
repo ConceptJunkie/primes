@@ -24,9 +24,6 @@ def main( ):
     sexyTripletIndex = 1
     sexyQuadIndex = 1
 
-    firstDataFile = 0
-    lastDataFile = 9950
-
     sexyPrimeInterval = 1
     sexyTripletInterval = 1
     sexyQuadInterval = 1
@@ -39,7 +36,7 @@ def main( ):
     sexyTripletFile = open( outputDirectory + os.sep + 'sexy_triplets.txt', 'w' )
     sexyQuadFile = open( outputDirectory + os.sep + 'sexy_quadruplets.txt', 'w' )
 
-    for index, prime in readPrimeNumbers( firstDataFile, lastDataFile ):
+    for index, prime in readPrimeNumbers( ):
         if index % printInterval == 0:
             print( '\r{:,}'.format( index ), end='' )
 
