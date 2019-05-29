@@ -1,15 +1,15 @@
-#!/usr/bin/env python  c`
+#!/usr/bin/env python
 
 import gmpy2
 import os
 
 from bitarray import bitarray
 
-inputDirectory = "d:\\primes"
+inputDirectory = "f:\\primes"
 #outputDirectory = "c:\\sys\\ut\\rpn\\rpn"
-outputDirectory = "d:\\primes"
+outputDirectory = "d:\\dev\\github\\primes"
 
-primeFileIndex = 6
+primeFileIndex = 7
 
 
 #//******************************************************************************
@@ -150,7 +150,7 @@ def readPrimeNumbers( end=None ):
 
     primeIndex = primeFileIndex
 
-    primesFile = open( inputDirectory + os.sep + 'primes.11.bin', 'rb' )
+    primesFile = open( inputDirectory + os.sep + 'primes.bin', 'rb' )
 
     quit = False
 
