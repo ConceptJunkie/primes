@@ -104,7 +104,7 @@ def isPrime( n ):
 
 #//******************************************************************************
 #//
-#//  readPrimeNumbers
+#//  readPrimeDataFiles
 #//
 #//******************************************************************************
 
@@ -147,6 +147,7 @@ def readPrimeNumbers( end=None ):
 
     for i in range( primeFileIndex ):
         yield i + 1, primes[ i ]
+        #print( i + 1, primes[ i ] )
 
     primeIndex = primeFileIndex
 
@@ -171,6 +172,7 @@ def readPrimeNumbers( end=None ):
                 prime = primeBase + decodeArray[ index % chunkSize ]
                 primeIndex += 1
                 yield primeIndex, prime
+                #print( primeIndex, prime )
 
                 if primeIndex == end:
                     quit = True
