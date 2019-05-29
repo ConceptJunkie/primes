@@ -9,7 +9,7 @@ inputDirectory = "d:\\primes"
 #outputDirectory = "c:\\sys\\ut\\rpn\\rpn"
 outputDirectory = "d:\\primes"
 
-primeFileIndex = 6
+primeFileIndex = 7
 
 
 #//******************************************************************************
@@ -104,7 +104,7 @@ def isPrime( n ):
 
 #//******************************************************************************
 #//
-#//  readPrimeNumbers
+#//  readPrimeDataFiles
 #//
 #//******************************************************************************
 
@@ -147,10 +147,11 @@ def readPrimeNumbers( end=None ):
 
     for i in range( primeFileIndex ):
         yield i + 1, primes[ i ]
+        #print( i + 1, primes[ i ] )
 
     primeIndex = primeFileIndex
 
-    primesFile = open( inputDirectory + os.sep + 'primes.11.bin', 'rb' )
+    primesFile = open( inputDirectory + os.sep + 'primes.17.bin', 'rb' )
 
     quit = False
 
@@ -171,6 +172,7 @@ def readPrimeNumbers( end=None ):
                 prime = primeBase + decodeArray[ index % chunkSize ]
                 primeIndex += 1
                 yield primeIndex, prime
+                #print( primeIndex, prime )
 
                 if primeIndex == end:
                     quit = True
