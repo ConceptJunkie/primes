@@ -2,7 +2,8 @@
 
 import os
 
-from primeDataUtils import isPrime, outputDirectory, readPrimeNumbers
+from primeDataUtils import isPrime, outputDirectory, readPrimeNumbers, \
+                           updateOutputInterval
 
 
 #//******************************************************************************
@@ -17,7 +18,7 @@ def main( ):
 
     sophieIndex = 0
 
-    outputInterval = 100
+    outputInterval = 1
 
     printInterval = 100000
 
@@ -25,7 +26,7 @@ def main( ):
 
     sophieFile = open( outputDirectory + os.sep + 'sophie_primes.txt', 'w' )
 
-    for index, prime in readPrimeNumbers( firstDataFile, lastDataFile ):
+    for index, prime in readPrimeNumbers( 4000000000 ):
         sophie = int( ( prime - 1 ) / 2 )
 
         if isPrime( sophie ):
@@ -33,11 +34,7 @@ def main( ):
 
             if sophieIndex % outputInterval == 0:
                 sophieFile.write( '{:12} {}\n'.format( sophieIndex, sophie ) )
-
-                if sophieIndex == 1000000:
-                    outputInterval = 1000
-                elif sophieIndex == 10000000:
-                    outputInterval = 10000
+                outputInterval = updateOutputInterval( sophieIndex, outputInterval )
 
         if index % printInterval == 0:
             print( '\r{:,}'.format( index ), end='' )

@@ -2,7 +2,8 @@
 
 import os
 
-from primeDataUtils import isPrime, outputDirectory, readPrimeNumbers
+from primeDataUtils import isPrime, outputDirectory, readPrimeNumbers, \
+                           updateOutputInterval
 
 
 #//******************************************************************************
@@ -22,15 +23,10 @@ def main( ):
 
     smallFile = open( outputDirectory + os.sep + 'small_primes.txt', 'w' )
 
-    for index, prime in readPrimeNumbers( ):
-        if index == 100000:
-            outputInterval = 200
-        elif index == 300000:
-            outputInterval = 500
-        elif index > 1000000:
-            break
-
+    for index, prime in readPrimeNumbers( 1000000 ):
         if index % outputInterval == 0 or ( isPrime( index ) and index > 500 ):
+            if index >= 100000:
+                outputInterval = updateOutputInterval( index, outputInterval )
             smallFile.write( '{:12} {}\n'.format( index, prime ) )
 
         if index % printInterval == 0:

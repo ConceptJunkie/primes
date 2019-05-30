@@ -64,9 +64,6 @@ def main( ):
                 if primes[ 0 ][ 0 ] % printInterval == 0:
                     print( '\r{:,}'.format( index ), end='' )
 
-                #if primes[ 0 ][ 0 ] > 10000000:
-                #    break
-
                 if diffs[ 0 ] < diffs[ 1 ]:
                     for i in range( 1, howWeak ):
                         if diffs[ i ] < diffs[ i + 1 ]:

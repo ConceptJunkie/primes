@@ -5,9 +5,8 @@ import os
 
 from bitarray import bitarray
 
-inputDirectory = "f:\\primes"
-#outputDirectory = "c:\\sys\\ut\\rpn\\rpn"
-outputDirectory = "d:\\dev\\github\\primes"
+inputDirectory = "d:\\primes"
+outputDirectory = "d:\\primes"
 
 primeFileIndex = 7
 
@@ -18,7 +17,7 @@ primeFileIndex = 7
 #//
 #//******************************************************************************
 
-primes = [ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53 ]
+primeNumbers = [ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53 ]
 
 
 #//******************************************************************************
@@ -31,7 +30,7 @@ def getPrimorial( index ):
     result = 1
 
     for i in range( index ):
-        result *= primes[ i ]
+        result *= primeNumbers[ i ]
 
     return result
 
@@ -43,7 +42,7 @@ def getPrimorial( index ):
 #//******************************************************************************
 
 def isRough( n, k ):
-    for prime in primes:
+    for prime in primeNumbers:
         if prime >= k:
             return True
 
@@ -61,10 +60,10 @@ def generateDecodeArray( index ):
     result = [ ]
 
     size = getPrimorial( index )
-    base = primes[ index ] - 1
+    base = primeNumbers[ index ] - 1
 
     for i in range( size ):
-        if isRough( i + base, primes[ index ] ):
+        if isRough( i + base, primeNumbers[ index ] ):
             result.append( i )
 
     return result
@@ -80,12 +79,12 @@ def generateEncodeMap( index ):
     result = { }
 
     size = getPrimorial( index )
-    base = primes[ index ] - 1
+    base = primeNumbers[ index ] - 1
 
     value = 0
 
     for i in range( size ):
-        if isRough( i + base, primes[ index ] ):
+        if isRough( i + base, primeNumbers[ index ] ):
             result[ i ] = value
             value += 1
 
@@ -125,6 +124,36 @@ def readPrimeDataFiles( firstDataFile, lastDataFile ):
                 yield int( items[ 0 ] ), int( items[ 1 ] )
 
 
+#//******************************************************************************
+#//
+#//  updateOutputInterval
+#//
+#//  The idnex should always be divisible by the interval.
+#//
+#//******************************************************************************
+
+def updateOutputInterval( index, outputInterval ):
+    if index == 100:
+        return 5
+    elif index == 1000:
+        return 10
+    elif index == 10000:
+        return 50
+    elif index == 100000:
+        return 200
+    elif index == 1000000:
+        return 500
+    elif index == 10000000:
+        return 1000
+    elif index == 100000000:
+        return 4000
+    elif index == 1000000000:
+        return 10000
+    elif index == 10000000000:
+        return 50000
+
+    return outputInterval
+
 
 #//******************************************************************************
 #//
@@ -137,7 +166,7 @@ def readPrimeNumbers( end=None ):
 
     decodeArray = generateDecodeArray( primeFileIndex )
 
-    base = primes[ primeFileIndex ] - 1
+    base = primeNumbers[ primeFileIndex ] - 1
     chunkSize = len( decodeArray )
     baseChunkSize = getPrimorial( primeFileIndex )
     primeBase = base - baseChunkSize        # The very first time through will kick it up to base.
@@ -146,8 +175,8 @@ def readPrimeNumbers( end=None ):
         end = 1000000000 # 40000000000
 
     for i in range( primeFileIndex ):
-        yield i + 1, primes[ i ]
-        #print( i + 1, primes[ i ] )
+        yield i + 1, primeNumbers[ i ]
+        #print( i + 1, primeNumbers[ i ] )
 
     primeIndex = primeFileIndex
 

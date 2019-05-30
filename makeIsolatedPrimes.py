@@ -1,18 +1,8 @@
 #!/usr/bin/env python
 
-import contextlib
-import bz2
-import pickle
+import os
 
-
-def saveFile( var, fileName ):
-    with contextlib.closing( bz2.BZ2File( fileName + '.pckl.bz2', 'wb' ) ) as pickleFile:
-        pickle.dump( var, pickleFile )
-
-
-def loadFile( fileName ):
-    with contextlib.closing( bz2.BZ2File( fileName + 'pckl.bz2', 'rb' ) ) as pickleFile:
-        return pickle.load( pickleFile )
+from primeDataUtils import outputDirectory, readPrimeNumbers, updateOutputInterval
 
 
 #//******************************************************************************
@@ -39,21 +29,20 @@ def main( ):
 
     isolatedIndex = 0
 
-    firstDataFile = 0
-    lastDataFile = 9950
-
-    numberOfTypes = 200
+    numberOfTypes = 100
 
     isolatedIndex = [ 0 ] * numberOfTypes
     isolatedFile = [ ]
 
     for i in range( 0, numberOfTypes ):
-        isolatedFile.append( open( 'c:\\data\primes\\isolated{:03}_primes.txt'.format( i * 2 + 4 ), 'w' ) )
+        isolatedFile.append( open( outputDirectory + os.sep + 'isolated{:03}_primes.txt'.format( i * 2 + 4 ), 'w' ) )
 
-    printInterval = 1000000
+    printInterval = 100000
 
-    for index, prime in readPrimeNumbers( firstDataFile, lastDataFile ):
-        primes.append( [ index, prime ) ] )
+    outputInterval = [ 1 ] * numberOfTypes
+
+    for index, prime in readPrimeNumbers( 1000000000 ):
+        primes.append( [ index, prime ] )
         del primes[ 0 ]
 
         diffs.append( primes[ -1 ][ 1 ] - primes[ -2 ][ 1 ] )
@@ -65,14 +54,15 @@ def main( ):
             sum += diffs[ i ]
             adiffs[ i ] = sum
 
-        if primes[ 0 ][ 0 ] % printInterval == 0:
+        if index % printInterval == 0:
             print( '\r{:,}'.format( index ), end='' )
 
         for i in range( 0, numberOfTypes ):
             diff = i * 2 + 4
 
-            if diffs[ 0 ] > diff and diffs[ 1 ] > diff and isolatedIndex[ i ] <= 1000000:
+            if diffs[ 0 ] > diff and diffs[ 1 ] > diff:
                 isolatedIndex[ i ] += 1
+                outputInterval[ i ] = updateOutputInterval( isolatedIndex[ i ], outputInterval[ i ] )
                 isolatedFile[ i ].write( '{},{}\n'.format( isolatedIndex[ i ], primes[ 1 ][ 1 ] ) )
 
     for i in range( 0, numberOfTypes ):

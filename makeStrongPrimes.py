@@ -2,7 +2,7 @@
 
 import os
 
-from primeDataUtils import outputDirectory, readPrimeNumbers
+from primeDataUtils import outputDirectory, readPrimeNumbers, updateOutputInterval
 
 
 #//******************************************************************************
@@ -18,8 +18,6 @@ def main( ):
     maxIndex = 1000000
     primesSize = howStrong + 2
 
-    outputIntervals = [ 1000, 1000, 1000, 500, 100, 10, 1, 1, 1, 1, 1 ]
-
     primes = [ ]
     diffs = [ ]
 
@@ -29,6 +27,7 @@ def main( ):
     primes = [ [ -9999999, -9999999 ] ] * primesSize
 
     diffs = [ 0 ] * ( primesSize - 1 )
+    outputIntervals = [ 1 ] * ( howStrong - 1 )
 
     firstDataFile = 0
     lastDataFile = 9950
@@ -42,7 +41,7 @@ def main( ):
 
     printInterval = 100000
 
-    for index, prime in readPrimeNumbers( firstDataFile, lastDataFile ):
+    for index, prime in readPrimeNumbers( 4000000000 ):
         primes.append( [ index, prime ] )
         del primes[ 0 ]
 
@@ -61,6 +60,7 @@ def main( ):
                         strongIndex[ i - 1 ] += 1
 
                         if strongIndex[ i - 1 ] % outputIntervals[ i - 1 ] == 0:
+                            outputIntervals[ i - 1 ] = updateOutputInterval( strongIndex[ i - 1 ], outputIntervals[ i - 1 ] )
                             strongFiles[ i - 1 ].write( '{:12} {}\n'.format( strongIndex[ i - 1 ], primes[ 1 ][ 1 ] ) )
                 else:
                     break

@@ -12,9 +12,6 @@ from primeDataUtils import outputDirectory, readPrimeNumbers
 #//******************************************************************************
 
 def main( ):
-    firstDataFile = 30000
-    lastDataFile = 39950
-
     outputInterval = 25000
     printInterval = 100000
 
@@ -22,7 +19,7 @@ def main( ):
 
     hugeFile = open( outputDirectory + os.sep + 'huge_primes.txt', 'w' )
 
-    for index, prime in readPrimeNumbers( firstDataFile, lastDataFile ):
+    for index, prime in readPrimeNumbers( ):
         if index % outputInterval == 0:
             hugeFile.write( '{:12} {}\n'.format( index, prime ) )
 

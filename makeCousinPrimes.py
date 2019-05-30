@@ -2,7 +2,7 @@
 
 import os
 
-from primeDataUtils import outputDirectory, readPrimeNumbers
+from primeDataUtils import outputDirectory, readPrimeNumbers, updateOutputInterval
 
 
 #//******************************************************************************
@@ -17,11 +17,8 @@ def main( ):
     diff = 0
 
     cousinIndex = 0
+    outputInterval = 1
 
-    firstDataFile = 0
-    lastDataFile = 950
-
-    outputInterval = 100
     printInterval = 100000
 
     previousPrime = 1
@@ -30,10 +27,7 @@ def main( ):
 
     cousinFile = open( outputDirectory + os.sep + 'cousin_primes.txt', 'w' )
 
-    for index, prime in readPrimeNumbers( firstDataFile, lastDataFile ):
-        if index == 1000000000:
-            outputInterval = 1000
-
+    for index, prime in readPrimeNumbers( 4000000000 ):
         diff = prime - previousPrime
 
         previousPrime = prime
@@ -45,6 +39,7 @@ def main( ):
             cousinIndex += 1
 
             if cousinIndex % outputInterval == 0:
+                outputInterval = updateOutputInterval( cousinIndex, outputInterval )
                 cousinFile.write( '{:12} {}\n'.format( cousinIndex, prime - 4 ) )
 
     cousinFile.close( )
