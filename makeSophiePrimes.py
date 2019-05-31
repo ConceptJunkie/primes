@@ -13,9 +13,6 @@ from primeDataUtils import isPrime, outputDirectory, readPrimeNumbers, \
 #//******************************************************************************
 
 def main( ):
-    firstDataFile = 0
-    lastDataFile = 1950
-
     sophieIndex = 0
 
     outputInterval = 1
