@@ -20,10 +20,6 @@ def main( ):
     sexyTripletIndex = 0
     sexyQuadIndex = 0
 
-    sexyPrimeIndex = 1
-    sexyTripletIndex = 1
-    sexyQuadIndex = 1
-
     sexyPrimeInterval = 1
     sexyTripletInterval = 1
     sexyQuadInterval = 1
@@ -36,37 +32,40 @@ def main( ):
     sexyTripletFile = open( outputDirectory + os.sep + 'sexy_triplets.txt', 'w' )
     sexyQuadFile = open( outputDirectory + os.sep + 'sexy_quadruplets.txt', 'w' )
 
-    for index, prime in readPrimeNumbers( 4000000000 ):
+    for index, prime in readPrimeNumbers( 1000000000 ):
         if index % printInterval == 0:
             print( '\r{:,}'.format( index ), end='' )
 
         primes.append( prime )
         del primes[ 0 ]
 
+        if primes[ 0 ] == 0:
+            continue
+
+        prime0 = primes[ 0 ]
+
         b6 = False
         b12 = False
         b18 = False
 
-        for i in primes[ : : -1 ]:
-            if not b6 and i == prime - 6:
+        for i in primes:
+            if i == prime0 + 6:
                 b6 = True
-
-            if not b12 and i == prime - 12:
+            elif i == prime0 + 12:
                 b12 = True
-
-            if i == prime - 18:
+            elif i == prime0 + 18:
                 b18 = True
                 break
 
+        # we found a sexy prime
         if not b6:
             continue
 
-        # we found a sexy prime
         sexyPrimeIndex += 1
 
         if sexyPrimeIndex % sexyPrimeInterval == 0:
             sexyPrimeInterval = updateOutputInterval( sexyPrimeIndex, sexyPrimeInterval )
-            sexyPrimeFile.write( '{:12} {}\n'.format( sexyPrimeIndex, prime - 6 ) )
+            sexyPrimeFile.write( '{:12} {}\n'.format( sexyPrimeIndex, prime0 ) )
 
         if b12:
             if b18:
@@ -75,14 +74,14 @@ def main( ):
 
                 if sexyQuadIndex % sexyQuadInterval == 0:
                     sexyQuadInterval = updateOutputInterval( sexyQuadIndex, sexyQuadInterval )
-                    sexyQuadFile.write( '{:12} {}\n'.format( sexyQuadIndex, prime - 18 ) )  # 18 because 3 * 6
+                    sexyQuadFile.write( '{:12} {}\n'.format( sexyQuadIndex, prime0 ) )  # 18 because 3 * 6
             else:
                 # we found a sexy triplet
                 sexyTripletIndex += 1
 
                 if sexyTripletIndex % sexyTripletInterval == 0:
                     sexyTripletInterval = updateOutputInterval( sexyTripletIndex, sexyTripletInterval )
-                    sexyTripletFile.write( '{:12} {}\n'.format( sexyTripletIndex, prime - 12 ) )  # 12 because 2 * 6
+                    sexyTripletFile.write( '{:12} {}\n'.format( sexyTripletIndex, prime0 ) )  # 12 because 2 * 6
 
     sexyPrimeFile.close( )
     sexyTripletFile.close( )
