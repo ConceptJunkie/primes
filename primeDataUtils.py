@@ -5,8 +5,8 @@ import os
 
 from bitarray import bitarray
 
-inputDirectory = "d:\\primes"
-outputDirectory = "d:\\primes"
+inputDirectory = "c:\\rick\\primes"
+outputDirectory = "c:\\rick\\primes"
 
 primeFileIndex = 7
 

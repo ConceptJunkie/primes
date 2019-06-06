@@ -45,7 +45,7 @@ def main( ):
     quintIndex += 1
     quintFile.write( '{:12} {}\n'.format( 1, 5 ) )
 
-    for index, prime in readPrimeNumbers( 4000000000 ):
+    for index, prime in readPrimeNumbers( 10000000000 ):
         if index % printInterval == 0:
             print( '\r{:,}'.format( index ), end='' )
 

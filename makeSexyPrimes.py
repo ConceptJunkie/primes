@@ -32,7 +32,7 @@ def main( ):
     sexyTripletFile = open( outputDirectory + os.sep + 'sexy_triplets.txt', 'w' )
     sexyQuadFile = open( outputDirectory + os.sep + 'sexy_quadruplets.txt', 'w' )
 
-    for index, prime in readPrimeNumbers( 1000000000 ):
+    for index, prime in readPrimeNumbers( 4000000000 ):
         if index % printInterval == 0:
             print( '\r{:,}'.format( index ), end='' )
 
@@ -74,14 +74,14 @@ def main( ):
 
                 if sexyQuadIndex % sexyQuadInterval == 0:
                     sexyQuadInterval = updateOutputInterval( sexyQuadIndex, sexyQuadInterval )
-                    sexyQuadFile.write( '{:12} {}\n'.format( sexyQuadIndex, prime0 ) )  # 18 because 3 * 6
+                    sexyQuadFile.write( '{:12} {}\n'.format( sexyQuadIndex, prime0 ) )
             else:
                 # we found a sexy triplet
                 sexyTripletIndex += 1
 
                 if sexyTripletIndex % sexyTripletInterval == 0:
                     sexyTripletInterval = updateOutputInterval( sexyTripletIndex, sexyTripletInterval )
-                    sexyTripletFile.write( '{:12} {}\n'.format( sexyTripletIndex, prime0 ) )  # 12 because 2 * 6
+                    sexyTripletFile.write( '{:12} {}\n'.format( sexyTripletIndex, prime0 ) )
 
     sexyPrimeFile.close( )
     sexyTripletFile.close( )
