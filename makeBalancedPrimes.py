@@ -40,7 +40,7 @@ def main( ):
 
     printInterval = 100000
 
-    for index, prime in readPrimeNumbers( 1000000000 ):
+    for index, prime in readPrimeNumbers( 100 ):
         primes.append( [ index, prime ] )
         del primes[ 0 ]
 
@@ -56,7 +56,7 @@ def main( ):
         if index % printInterval == 0:
             print( '\r{:,}'.format( index ), end='' )
 
-        #print( diffs, prime )
+        print( diffs, prime )
 
         for i in range( 0, numberOfTypes ):
             skip = False
@@ -74,7 +74,7 @@ def main( ):
 
                 if balancedIndex[ i ] % outputInterval[ i ] == 0:
                     outputInterval[ i ] = updateOutputInterval( balancedIndex[ i ], outputInterval[ i ] )
-                    #print( 'balanced', i, 'prime', primes[ center + 1 ][ 1 ] )
+                    print( 'balanced', i, 'prime', primes[ center + 1 ][ 1 ] )
                     balancedFile[ i ].write( '{:12} {}\n'.format( balancedIndex[ i ], primes[ center + 1 ][ 1 ] ) )
 
     for i in range( 0, numberOfTypes ):
