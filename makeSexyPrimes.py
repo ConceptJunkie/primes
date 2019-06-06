@@ -32,7 +32,7 @@ def main( ):
     sexyTripletFile = open( outputDirectory + os.sep + 'sexy_triplets.txt', 'w' )
     sexyQuadFile = open( outputDirectory + os.sep + 'sexy_quadruplets.txt', 'w' )
 
-    for index, prime in readPrimeNumbers( 4000000000 ):
+    for index, prime in readPrimeNumbers( 10000000000 ):
         if index % printInterval == 0:
             print( '\r{:,}'.format( index ), end='' )
 
@@ -57,10 +57,10 @@ def main( ):
                 b18 = True
                 break
 
-        # we found a sexy prime
         if not b6:
             continue
 
+        # we found a sexy prime
         sexyPrimeIndex += 1
 
         if sexyPrimeIndex % sexyPrimeInterval == 0:
