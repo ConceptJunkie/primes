@@ -14,7 +14,7 @@ from primeDataUtils import generateEncodeMap, getPrimorial, outputDirectory, \
 
 def main( ):
     firstDataFile = 0
-    lastDataFile = 59950
+    lastDataFile = 60000
 
     printInterval = 100000
 
