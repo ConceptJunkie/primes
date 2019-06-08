@@ -27,7 +27,10 @@ def main( ):
 
     cousinFile = open( outputDirectory + os.sep + 'cousin_primes.txt', 'w' )
 
-    for index, prime in readPrimeNumbers( 10000000000 ):
+    cousinFile.write( '{:12} {}\n'.format( 1, 3 ) )
+    cousinIndex = 1
+
+    for index, prime in readPrimeNumbers( 60000000000 ):
         diff = prime - previousPrime
 
         previousPrime = prime

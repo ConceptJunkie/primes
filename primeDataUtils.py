@@ -132,25 +132,64 @@ def readPrimeDataFiles( firstDataFile, lastDataFile ):
 #//
 #//******************************************************************************
 
-def updateOutputInterval( index, outputInterval ):
-    if index == 100:
-        return 5
-    elif index == 1000:
-        return 10
-    elif index == 10000:
-        return 50
-    elif index == 100000:
-        return 200
-    elif index == 1000000:
-        return 500
-    elif index == 10000000:
-        return 1000
-    elif index == 100000000:
-        return 4000
-    elif index == 1000000000:
-        return 10000
-    elif index == 10000000000:
-        return 50000
+def updateOutputInterval( index, outputInterval, rarity=0 ):
+    if rarity == 0:
+        if index == 100:
+            return 5
+        elif index == 1000:
+            return 10
+        elif index == 10000:
+            return 50
+        elif index == 100000:
+            return 200
+        elif index == 1000000:
+            return 500
+        elif index == 10000000:
+            return 1000
+        elif index == 100000000:
+            return 4000
+        elif index == 1000000000:
+            return 10000
+        elif index == 10000000000:
+            return 50000
+    elif rarity == 1:
+        if index == 1000:
+            return 5
+        elif index == 10000:
+            return 10
+        elif index == 100000:
+            return 50
+        elif index == 1000000:
+            return 200
+        elif index == 10000000:
+            return 500
+        elif index == 100000000:
+            return 1000
+        elif index == 1000000000:
+            return 4000
+        elif index == 10000000000:
+            return 10000
+        elif index == 100000000000:
+            return 50000
+    elif rarity >= 2:
+        if index == 10000:
+            return 5
+        elif index == 100000:
+            return 10
+        elif index == 1000000:
+            return 50
+        elif index == 10000000:
+            return 200
+        elif index == 100000000:
+            return 500
+        elif index == 1000000000:
+            return 1000
+        elif index == 10000000000:
+            return 4000
+        elif index == 100000000000:
+            return 10000
+        elif index == 1000000000000:
+            return 50000
 
     return outputInterval
 
