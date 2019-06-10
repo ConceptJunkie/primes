@@ -78,7 +78,7 @@ def main( ):
             quadIndex += 1
 
             if quadIndex % quadInterval == 0:
-                quadInterval = updateOutputInterval( quadIndex, quadInterval )
+                quadInterval = updateOutputInterval( quadIndex, quadInterval, 1 )
                 quadFile.write( '{:12} {}\n'.format( quadIndex, prime - 8 ) )
 
             if diffs[ -4 ] == 4:
@@ -93,7 +93,7 @@ def main( ):
             quintIndex += 1
 
             if quintIndex % quintInterval == 0:
-                quintInterval = updateOutputInterval( quintIndex, quintInterval )
+                quintInterval = updateOutputInterval( quintIndex, quintInterval, 2 )
                 quintFile.write( '{:12} {}\n'.format( quintIndex, prime - 12 ) )
 
             # and we can catch prime sextuplets while we're at it
