@@ -171,7 +171,7 @@ def updateOutputInterval( index, outputInterval, rarity=0 ):
             return 10000
         elif index == 100000000000:
             return 50000
-    elif rarity >= 2:
+    elif rarity == 2:
         if index == 10000:
             return 5
         elif index == 100000:
@@ -190,6 +190,8 @@ def updateOutputInterval( index, outputInterval, rarity=0 ):
             return 10000
         elif index == 1000000000000:
             return 50000
+    elif rarity >= 3:
+        return 1
 
     return outputInterval
 
