@@ -21,7 +21,7 @@ def main( ):
     diffs = [ ]
 
     # everything is offset by 2
-    WeakIndex = [ 0 ] * 9
+    weakIndex = [ 0 ] * ( howWeak - 1 )
 
     for i in range( 0, primesSize ):
         primes.append( [ -9999999, -9999999 ] )
