@@ -48,8 +48,6 @@ def main( ):
         diffs.append( primes[ -1 ][ 1 ] - primes[ -2 ][ 1 ] )
         del diffs[ 0 ]
 
-        sum = 0
-
         if index % printInterval == 0:
             print( '\r{:,}'.format( index ), end='' )
 

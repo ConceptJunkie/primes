@@ -2,7 +2,7 @@
 
 import os
 
-from primeDataUtils import outputDirectory, readPrimeNumbers
+from primeDataUtils import outputDirectory, readPrimeNumbers, updateOutputInterval
 
 
 #//******************************************************************************
@@ -22,6 +22,7 @@ def main( ):
 
     # everything is offset by 2
     weakIndex = [ 0 ] * ( howWeak - 1 )
+    outputIntervals = [ 1 ] * ( howWeak - 1 )
 
     for i in range( 0, primesSize ):
         primes.append( [ -9999999, -9999999 ] )
@@ -43,9 +44,7 @@ def main( ):
         diffs.append( primes[ -1 ][ 1 ] - primes[ -2 ][ 1 ] )
         del diffs[ 0 ]
 
-        sum = 0
-
-        if primes[ 0 ][ 0 ] % printInterval == 0:
+        if index % printInterval == 0:
             print( '\r{:,}'.format( index ), end='' )
 
         if diffs[ 0 ] < diffs[ 1 ]:
