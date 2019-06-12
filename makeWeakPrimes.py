@@ -51,7 +51,7 @@ def main( ):
         if diffs[ 0 ] < diffs[ 1 ]:
             for i in range( 1, howWeak ):
                 if diffs[ i ] < diffs[ i + 1 ]:
-                    if primes[ 1 ][ 1 ] > 0 and weakIndex[ i - 1 ] < maxIndex:
+                    if primes[ 1 ][ 1 ] > 0:
                         weakIndex[ i - 1 ] += 1
 
                         if weakIndex[ i - 1 ] % outputIntervals[ i - 1 ] == 0:
