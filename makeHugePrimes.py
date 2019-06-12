@@ -19,8 +19,11 @@ def main( ):
 
     hugeFile = open( outputDirectory + os.sep + 'huge_primes.txt', 'w' )
 
-    for index, prime in readPrimeNumbers( ):
+    for index, prime in readPrimeNumbers( 60000000000 ):
         if index % outputInterval == 0:
+            if index == 30000000000:
+                outputInterval = 50000
+
             hugeFile.write( '{:12} {}\n'.format( index, prime ) )
 
         if index % printInterval == 0:
