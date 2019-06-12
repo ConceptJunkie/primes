@@ -21,7 +21,7 @@ def main( ):
 
     isolatedIndex = 0
 
-    numberOfTypes = 100
+    numberOfTypes = 5
 
     isolatedIndex = [ 0 ] * numberOfTypes
     outputInterval = [ 1 ] * numberOfTypes
