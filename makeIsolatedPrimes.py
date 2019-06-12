@@ -60,6 +60,8 @@ def main( ):
                 if ( isolatedIndex[ i ] % outputInterval[ i ] == 0 ):
                     outputInterval[ i ] = updateOutputInterval( isolatedIndex[ i ], outputInterval[ i ] )
                     isolatedFiles[ i ].write( '{:12} {}\n'.format( isolatedIndex[ i ], primes[ 1 ][ 1 ] ) )
+            else:
+                break
 
     for i in range( 0, numberOfTypes ):
         isolatedFiles[ i ].close( )
