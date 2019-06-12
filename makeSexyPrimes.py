@@ -32,7 +32,7 @@ def main( ):
     sexyTripletFile = open( outputDirectory + os.sep + 'sexy_triplets.txt', 'w' )
     sexyQuadFile = open( outputDirectory + os.sep + 'sexy_quadruplets.txt', 'w' )
 
-    for index, prime in readPrimeNumbers( 10000000000 ):
+    for index, prime in readPrimeNumbers( 60000000000 ):
         if index % printInterval == 0:
             print( '\r{:,}'.format( index ), end='' )
 

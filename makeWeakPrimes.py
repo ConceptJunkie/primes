@@ -15,7 +15,6 @@ def main( ):
     lineCount = 1
 
     howWeak = 10
-    maxIndex = 1000000
     primesSize = howWeak + 2
 
     primes = [ ]
@@ -30,51 +29,39 @@ def main( ):
     for i in range( 0, primesSize - 1 ):
         diffs.append( 0 )
 
-    firstDataFile = 0
-    lastDataFile = 950
-
-    inputList = [ ]
-
-    current = firstDataFile
-
-    while current <= lastDataFile:
-        inputList.append( 'c:\\data\primes\\{:04}-{:04}.txt'.format( current, current + 50 ) )
-        current += 50
-
-    WeakFiles = [ ]
+    weakFiles = [ ]
 
     for i in range( 2, howWeak + 1 ):
-        WeakFiles.append( open( outputDirectory + os.sep + 'weak_primes_{:02}.txt'.format( i ), 'w' ) )
+        weakFiles.append( open( outputDirectory + os.sep + 'weak_primes_{:02}.txt'.format( i ), 'w' ) )
 
     printInterval = 1000000
 
-    for fileName in inputList:
-        with open( fileName, 'r' ) as file:
-            for line in file:
-                items = line[ : -1 ].split( ',' )
+    for index, prime in readPrimeNumbers( 60000000000 ):
+        primes.append( [ index, prime ] )
+        del primes[ 0 ]
 
-                primes.append( [ int( items[ 0 ] ), int( items[ 1 ] ) ] )
-                del primes[ 0 ]
+        diffs.append( primes[ -1 ][ 1 ] - primes[ -2 ][ 1 ] )
+        del diffs[ 0 ]
 
-                diffs.append( primes[ -1 ][ 1 ] - primes[ -2 ][ 1 ] )
-                del diffs[ 0 ]
+        sum = 0
 
-                sum = 0
+        if primes[ 0 ][ 0 ] % printInterval == 0:
+            print( '\r{:,}'.format( index ), end='' )
 
-                if primes[ 0 ][ 0 ] % printInterval == 0:
-                    print( '\r{:,}'.format( index ), end='' )
+        if diffs[ 0 ] < diffs[ 1 ]:
+            for i in range( 1, howWeak ):
+                if diffs[ i ] < diffs[ i + 1 ]:
+                    if primes[ 1 ][ 1 ] > 0 and weakIndex[ i - 1 ] < maxIndex:
+                        weakIndex[ i - 1 ] += 1
 
-                if diffs[ 0 ] < diffs[ 1 ]:
-                    for i in range( 1, howWeak ):
-                        if diffs[ i ] < diffs[ i + 1 ]:
-                            if primes[ 1 ][ 1 ] > 0 and WeakIndex[ i - 1 ] < maxIndex:
-                                WeakIndex[ i - 1 ] += 1
-                                WeakFiles[ i - 1 ].write( '{},{}\n'.format( WeakIndex[ i - 1 ], primes[ 1 ][ 1 ] ) )
-                        else:
-                            break
+                        if weakIndex[ i - 1 ] % outputIntervals[ i - 1 ] == 0:
+                            outputIntervals[ i - 1 ] = updateOutputInterval( weakIndex[ i - 1 ], outputIntervals[ i - 1 ] )
+                            weakFiles[ i - 1 ].write( '{:12} {}\n'.format( weakIndex[ i - 1 ], primes[ 1 ][ 1 ] ) )
+                else:
+                    break
 
     for i in range( 2, howWeak + 1 ):
-        WeakFiles[ i - 2 ].close( )
+        weakFiles[ i - 2 ].close( )
 
 
 #//******************************************************************************

@@ -30,7 +30,7 @@ def main( ):
 
     octyPrimeFile = open( outputDirectory + os.sep + 'octy_primes.txt', 'w' )
 
-    for index, prime in readPrimeNumbers( 10000000000 ):
+    for index, prime in readPrimeNumbers( 60000000000 ):
         if index % printInterval == 0:
             print( '\r{:,}'.format( index ), end='' )
 

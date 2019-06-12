@@ -23,7 +23,7 @@ def main( ):
 
     sophieFile = open( outputDirectory + os.sep + 'sophie_primes.txt', 'w' )
 
-    for index, prime in readPrimeNumbers( 10000000000 ):
+    for index, prime in readPrimeNumbers( 60000000000 ):
         sophie = int( ( prime - 1 ) / 2 )
 
         if isPrime( sophie ):

@@ -36,7 +36,7 @@ def main( ):
     isolatedFiles[ 0 ].write( '{:12} {}\n'.format( 1, 2 ) )   # OEIS considers 2 an isolated prime
     isolatedIndex[ i ] += 1
 
-    for index, prime in readPrimeNumbers( 4000000000 ):
+    for index, prime in readPrimeNumbers( 60000000000 ):
         primes.append( [ index, prime ] )
         del primes[ 0 ]
 

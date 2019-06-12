@@ -41,7 +41,7 @@ def main( ):
 
     printInterval = 100000
 
-    for index, prime in readPrimeNumbers( 4000000000 ):
+    for index, prime in readPrimeNumbers( 60000000000 ):
         primes.append( [ index, prime ] )
         del primes[ 0 ]
 
