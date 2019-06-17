@@ -23,8 +23,10 @@ def main( ):
         if index % outputInterval == 0:
             if index == 20000000000:
                 outputInterval = 50000
-            elif index == 40000000000:
+            elif index == 30000000000:
                 outputInterval = 100000
+            elif index == 40000000000:
+                outputInterval = 200000
 
             hugeFile.write( '{:12} {}\n'.format( index, prime ) )
 

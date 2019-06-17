@@ -133,7 +133,26 @@ def readPrimeDataFiles( firstDataFile, lastDataFile ):
 #//******************************************************************************
 
 def updateOutputInterval( index, outputInterval, rarity=0 ):
-    if rarity == 0:
+    if rarity == -1:
+        if index == 100:
+            return 10
+        elif index == 1000:
+            return 100
+        elif index == 10000:
+            return 500
+        elif index == 100000:
+            return 2000
+        elif index == 1000000:
+            return 5000
+        elif index == 10000000:
+            return 10000
+        elif index == 100000000:
+            return 40000
+        elif index == 1000000000:
+            return 100000
+        elif index == 10000000000:
+            return 500000
+    elif rarity == 0:
         if index == 100:
             return 5
         elif index == 1000:

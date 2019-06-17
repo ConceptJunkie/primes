@@ -64,7 +64,7 @@ def main( ):
         sexyPrimeIndex += 1
 
         if sexyPrimeIndex % sexyPrimeInterval == 0:
-            sexyPrimeInterval = updateOutputInterval( sexyPrimeIndex, sexyPrimeInterval )
+            sexyPrimeInterval = updateOutputInterval( sexyPrimeIndex, sexyPrimeInterval, -1 )
             sexyPrimeFile.write( '{:12} {}\n'.format( sexyPrimeIndex, prime0 ) )
 
         if b12:

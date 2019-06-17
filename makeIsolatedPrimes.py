@@ -58,7 +58,7 @@ def main( ):
                 isolatedIndex[ i ] += 1
 
                 if ( isolatedIndex[ i ] % outputInterval[ i ] == 0 ):
-                    outputInterval[ i ] = updateOutputInterval( isolatedIndex[ i ], outputInterval[ i ] )
+                    outputInterval[ i ] = updateOutputInterval( isolatedIndex[ i ], outputInterval[ i ], -1 if i == 0 else 0 )
                     isolatedFiles[ i ].write( '{:12} {}\n'.format( isolatedIndex[ i ], primes[ 1 ][ 1 ] ) )
             else:
                 break
