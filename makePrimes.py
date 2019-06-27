@@ -139,7 +139,7 @@ def getNextPrimeCandidate( p ):
 #//
 #//******************************************************************************
 
-batchSize = 100000
+batchSize = 1000000
 
 def makePrimeBatch( start ):
     p = getNextPrimeCandidate( start )
